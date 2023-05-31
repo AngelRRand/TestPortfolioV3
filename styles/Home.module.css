@@ -14,9 +14,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 5vh;
-  width: 5vh;
-  background-color: crimson;
   transition: top 0.0001s, left 0.0001s; /* Añadido para suavizar el movimiento */
 }
 
@@ -24,17 +21,53 @@
   position: absolute;
   top: 30vh;
   left: 30vh;
+  transition: top 0.0001s, left 0.0001s;
+}
+
+
+.caja2{
   height: 15vh;
   width: 35vh;
-  background-color: blue;
-  transition: top 0.0001s, left 0.0001s;
+  background-color: green;
 }
-.secondBox2 {
-  position: absolute;
-  top: 10vh;
-  left: 30vh;
-  height: 15vh;
-  width: 15vh;
-  background-color: blue;
-  transition: top 0.0001s, left 0.0001s;
+
+.caja3{
+  display: flex;
+  height: 4vh;
+  width: 35vh;
+  background-color: yellow;
 }
+/* En el caso de ser 300% */
+.sprite{
+  height: 94px;
+  width: 80px;
+  background-position: 0px 0;
+  animation: move 0.8s steps(4) infinite;
+  background-image: url('../img/Sprites.png');
+}
+
+@keyframes move {
+  to{
+    background-position: -384px 0;
+  }
+}
+
+
+
+/* En el caso de ser 100% */
+
+/* 
+.sprite{
+  height: 32px;
+  width: 28px;
+  background-position: 0px 0;
+  animation: move 0.8s steps(4) infinite;
+  background-image: url('../img/Sprites.png');
+}
+
+@keyframes move {
+  to{
+    background-position: -128px 0;
+  }
+}
+ */
