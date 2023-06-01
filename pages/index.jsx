@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import styles from '@/styles/Home.module.css';
 import Head from 'next/head';
+import pj from '../img/Base.png'
 import Image from 'next/image';
-import pj from '../img/Sprites.png'
 export default function Home() {
   const containerRef = useRef(null);
   const movableDivRef = useRef(null);
@@ -15,7 +15,7 @@ export default function Home() {
     const movableDiv = movableDivRef.current;
     const secondBox = secondBoxRef.current;
     const step = 2;   //Velocidad
-    const pushFactor = 0.9; // Factor de reducción de velocidad durante el empuje
+    const pushFactor = 1; // Factor de reducción de velocidad durante el empuje
 
     const isColliding = () => {
       const movableDivRect = movableDiv.getBoundingClientRect();
@@ -43,6 +43,7 @@ export default function Home() {
             requestAnimationFrame(moveUp);
             break;
           case 's':
+            movableDiv.classList.add(styles.spriteMoveS);
             requestAnimationFrame(moveDown);
             break;
           case 'd':
@@ -57,6 +58,11 @@ export default function Home() {
     function handleKeyUp(event) {
       const { key } = event;
       keyStateRef.current[key] = false;
+
+      console.log(key)
+      if (key === 's') {
+        movableDiv.classList.remove(styles.spriteMoveS);
+      }
     }
 
     function moveLeft() {
@@ -130,15 +136,20 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center} ref={containerRef}>
+
+
+
           {/* PERSONAJE */}
-          <div className={`${styles.caja} ${styles.sprite} `} ref={movableDivRef}>
-          </div>
+
+            <div className={`${styles.caja} ${keyStateRef.current['s'] ? styles.spriteMoveS : styles.spriteNotMoveS}`} ref={movableDivRef}></div>
+
 
           {/* CAJAS PRUEBA */}
           <div className={styles.secondBox} ref={secondBoxRef}>
             <div className={styles.caja2}></div>
-            <div className={styles.caja3}></div>
           </div>
+          <img src={pj} alt="" className={`${styles.pj}`} />
+          <Image src={pj} alt='' className={`${styles.pj}`}/>
         </div>
       </main>
     </>

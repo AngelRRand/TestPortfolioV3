@@ -1,0 +1,70 @@
+/* En el caso de ser 300% */
+.spriteNotMoveS {
+    height: 95px;
+    width: 60px;
+    background-position: -16px 0px;
+    animation: notmoveS 0.8s steps(4) infinite;
+    background-image: url('../img/Sprites.png');
+}
+
+@keyframes notmoveS {
+    to {
+        background-position: -400px 0px;
+    }
+}
+
+
+.spriteMoveS {
+    height: 95px;
+    width: 60px;
+    background-position: -16px -95px;
+    animation: moveS 0.8s steps(4) infinite;
+    background-color: red;
+    background-image: url('../img/Sprites.png');
+}
+
+
+
+@keyframes moveS {
+    to {
+        background-position: -400px -95px;
+    }
+}
+
+
+/* En el caso de ser 100% */
+
+/* 
+  .sprite{
+    height: 32px;
+    width: 28px;
+    background-position: 0px 0;
+    animation: move 0.8s steps(4) infinite;
+    background-image: url('../img/Sprites.png');
+  }
+  
+  @keyframes move {
+    to{
+      background-position: -128px 0;
+    }
+  }
+   */
+
+
+/* En el caso de ser 300% */
+/* 
+   
+   .sprite{
+    height: 94px;
+    width: 80px;
+    background-position: 0px 0;
+    animation: move 0.8s steps(4) infinite;
+    background-image: url('../img/Sprites.png');
+  }
+  
+  @keyframes move {
+    to{
+      background-position: -384px 0px;
+    }
+  }
+   */
