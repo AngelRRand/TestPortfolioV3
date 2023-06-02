@@ -4,11 +4,14 @@ import stylesMove from '@/styles/Move.module.css';
 import Head from 'next/head';
 import pj from '../img/Base.svg';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   const containerRef = useRef(null);
   const movableDivRef = useRef(null);
   const secondBoxRef = useRef(null);
+  const pjImagen = useRef(null);
+
   const keyStateRef = useRef({});
   const [lastKeyPressed, setLastKeyPressed] = useState(null);
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
@@ -34,17 +37,23 @@ export default function Home() {
 
     function handleKeyDown(event) {
       const { key } = event;
-
+    
       if (!keyStateRef.current[key]) {
+        // Reiniciar todas las teclas
+        Object.keys(keyStateRef.current).forEach(k => {
+          keyStateRef.current[k] = false;
+        });
+    
         keyStateRef.current[key] = true;
         setLastKeyPressed(key);
-
+    
         switch (key) {
           case 'a':
+            setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveA}`);
             requestAnimationFrame(moveLeft);
             break;
           case 'w':
-            setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveS}`);
+            setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveW}`);
             requestAnimationFrame(moveUp);
             break;
           case 's':
@@ -64,13 +73,30 @@ export default function Home() {
     function handleKeyUp(event) {
       const { key } = event;
       keyStateRef.current[key] = false;
-
-      if (key === 's' && !keyStateRef.current['w']) {
-        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
-      }
-
-      if (key === 'd' && !keyStateRef.current['a']) {
-        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveD}`);
+    
+      switch (key) {
+        case 'a':
+          setMovableDivClasses(prevClasses =>
+            prevClasses.replace(stylesMove.spriteMoveA, '') + ` ${stylesMove.spriteNotMoveA}`
+          );
+          break;
+        case 'w':
+          setMovableDivClasses(prevClasses =>
+            prevClasses.replace(stylesMove.spriteMoveW, '') + ` ${stylesMove.spriteNotMoveW}`
+          );
+          break;
+        case 's':
+          setMovableDivClasses(prevClasses =>
+            prevClasses.replace(stylesMove.spriteMoveS, '') + ` ${stylesMove.spriteNotMoveS}`
+          );
+          break;
+        case 'd':
+          setMovableDivClasses(prevClasses =>
+            prevClasses.replace(stylesMove.spriteMoveD, '') + ` ${stylesMove.spriteNotMoveD}`
+          );
+          break;
+        default:
+          break;
       }
     }
 
@@ -134,7 +160,8 @@ export default function Home() {
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
-
+  
+  console.log(pjImagen.current)
   return (
     <>
       <Head>
@@ -150,13 +177,10 @@ export default function Home() {
           <div className={styles.secondBox} ref={secondBoxRef}>
             <div className={styles.caja2}></div>
           </div>
-
-          <Image src={pj} alt="" className={`${styles.pj}`} width={200} height={200} />
-          
-          <div className={`${stylesMove.sprite} ${stylesMove.spriteMoveA}`}></div>
+          <Link href={'/pj'}>Moverse</Link>
+          <Image src={pj} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen}/>
         </div>
       </main>
-      
     </>
   );
 }
