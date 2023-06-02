@@ -12,14 +12,6 @@
   overflow: hidden; /* Añadido para ocultar el desbordamiento del contenido */
 }
 
-.caja {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: top 0.0001s, left 0.0001s; /* Añadido para suavizar el movimiento */
-  
-}
-
 .secondBox {
   position: absolute;
   top: 30vh;
@@ -55,41 +47,7 @@
 
 
 
-/* En el caso de ser 300% */
-.spriteNotMoveS{
-  height: 95px;
-  width: 60px;
-  background-position: -16px -1px;
-  animation: notmoveS 0.8s steps(4) infinite;
-  background-image: url('../img/Sprites.png');
-}
-
-@keyframes notmoveS {
-  to{
-    background-position: -400px -1px;
-  }
-}
-
-
-.spriteMoveS {
-  height: 97px;
-  width: 60px;
-  background-position: -16px -97px;
-  animation: moveS 0.8s steps(4) infinite;
-  background-image: url('../img/Sprites.png');
-}
-
-
-
-@keyframes moveS {
-  to{
-    background-position: -400px -97px;
-  }
-}
 .pj{
-  width: 100%;
-  height: 100%;
-  image-rendering: pixelated;
   position: absolute;
   bottom:0;
 }

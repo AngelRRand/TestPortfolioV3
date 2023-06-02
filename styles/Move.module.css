@@ -1,0 +1,138 @@
+/* En el caso de ser 300% */
+.sprite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: top 0.0001s, left 0.0001s; /* Añadido para suavizar el movimiento */
+  height: 100px;
+  width: 60px;
+  background-image: url('../img/Sprites.svg');
+  background-repeat: no-repeat;
+  background-size: 650%; /* Ajusta el tamaño de la imagen */
+
+}
+.spriteNotMoveS{
+  background-position: -15px 0px;
+  animation: notmoveS 0.8s steps(4) infinite;
+}
+
+@keyframes notmoveS {
+  to{
+    background-position: -405px -0px;
+  }
+}
+
+.spriteMoveS {
+  background-position: -15px -97px;
+  animation: moveS 0.8s steps(4) infinite;
+}
+
+@keyframes moveS {
+  to{
+    background-position: -405px -97px;
+  }
+}
+
+.spriteNotMoveD {
+  background-position: -15px -195px;
+  animation: notmoveD 0.8s steps(4) infinite;
+}
+
+@keyframes notmoveD {
+  to {
+    background-position: -405px -195px;
+  }
+}
+
+.spriteMoveD {
+  background-position: -15px -293px;
+  animation: moveD 0.8s steps(4) infinite;
+}
+
+@keyframes moveD {
+  to {
+    background-position: -405px -293px;
+  }
+}
+
+.spriteNotMoveW {
+  background-position: -15px -390px;
+  animation: notmoveW 0.8s steps(4) infinite;
+}
+
+@keyframes notmoveW {
+  to {
+    background-position: -405px -390px;
+  }
+}
+
+.spriteMoveW {
+  background-position: -15px -488px;
+  animation: moveW 0.8s steps(4) infinite;
+}
+
+@keyframes moveW {
+  to {
+    background-position: -405px -488px;
+  }
+}
+
+.spriteNotMoveA {
+  background-position: -15px -585px;
+  animation: notmoveA 0.8s steps(4) infinite;
+}
+
+@keyframes notmoveA {
+  to {
+    background-position: -405px -585px;
+  }
+}
+
+.spriteMoveA {
+  background-position: -15px -685px;
+  animation: moveA 0.8s steps(4) infinite;
+}
+
+@keyframes moveA {
+  to {
+    background-position: -405px -685px;
+  }
+}
+
+
+/* En el caso de ser 100% */
+
+/* 
+  .sprite{
+    height: 32px;
+    width: 28px;
+    background-position: 0px 0;
+    animation: move 0.8s steps(4) infinite;
+    background-image: url('../img/Sprites.png');
+  }
+  
+  @keyframes move {
+    to{
+      background-position: -128px 0;
+    }
+  }
+   */
+
+
+/* En el caso de ser 300% */
+/* 
+   
+   .sprite{
+    height: 94px;
+    width: 80px;
+    background-position: 0px 0;
+    animation: move 0.8s steps(4) infinite;
+    background-image: url('../img/Sprites.png');
+  }
+  
+  @keyframes move {
+    to{
+      background-position: -384px 0px;
+    }
+  }
+   */

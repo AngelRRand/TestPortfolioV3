@@ -1,21 +1,24 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '@/styles/Home.module.css';
+import stylesMove from '@/styles/Move.module.css';
 import Head from 'next/head';
-import pj from '../img/Base.png'
+import pj from '../img/Base.svg';
 import Image from 'next/image';
+
 export default function Home() {
   const containerRef = useRef(null);
   const movableDivRef = useRef(null);
-  const keyStateRef = useRef({});
-
-  //Segundo cubo
   const secondBoxRef = useRef(null);
+  const keyStateRef = useRef({});
+  const [lastKeyPressed, setLastKeyPressed] = useState(null);
+  const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
+
   useEffect(() => {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
     const secondBox = secondBoxRef.current;
-    const step = 2;   //Velocidad
-    const pushFactor = 1; // Factor de reducción de velocidad durante el empuje
+    const step = 2;
+    const pushFactor = 1;
 
     const isColliding = () => {
       const movableDivRect = movableDiv.getBoundingClientRect();
@@ -34,19 +37,22 @@ export default function Home() {
 
       if (!keyStateRef.current[key]) {
         keyStateRef.current[key] = true;
+        setLastKeyPressed(key);
 
         switch (key) {
           case 'a':
             requestAnimationFrame(moveLeft);
             break;
           case 'w':
+            setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveS}`);
             requestAnimationFrame(moveUp);
             break;
           case 's':
-            movableDiv.classList.add(styles.spriteMoveS);
+            setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveS}`);
             requestAnimationFrame(moveDown);
             break;
           case 'd':
+            setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveD}`);
             requestAnimationFrame(moveRight);
             break;
           default:
@@ -59,9 +65,12 @@ export default function Home() {
       const { key } = event;
       keyStateRef.current[key] = false;
 
-      console.log(key)
-      if (key === 's') {
-        movableDiv.classList.remove(styles.spriteMoveS);
+      if (key === 's' && !keyStateRef.current['w']) {
+        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
+      }
+
+      if (key === 'd' && !keyStateRef.current['a']) {
+        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveD}`);
       }
     }
 
@@ -136,22 +145,22 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center} ref={containerRef}>
+          <div className={movableDivClasses} ref={movableDivRef}></div>
 
-
-
-          {/* PERSONAJE */}
-
-            <div className={`${styles.caja} ${keyStateRef.current['s'] ? styles.spriteMoveS : styles.spriteNotMoveS}`} ref={movableDivRef}></div>
-
-
-          {/* CAJAS PRUEBA */}
           <div className={styles.secondBox} ref={secondBoxRef}>
             <div className={styles.caja2}></div>
           </div>
-          <img src={pj} alt="" className={`${styles.pj}`} />
-          <Image src={pj} alt='' className={`${styles.pj}`}/>
+
+          <Image src={pj} alt="" className={`${styles.pj}`} width={200} height={200} />
+          
+          <div className={`${stylesMove.sprite} ${stylesMove.spriteMoveA}`}></div>
         </div>
       </main>
+      
     </>
   );
 }
+
+
+
+{/*  <div className={`${styles.caja} ${stylesMove.spriteMoveD}`}></div> */}
