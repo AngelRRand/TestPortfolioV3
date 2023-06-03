@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import styles from '@/styles/Home.module.css';
 import stylesMove from '@/styles/Move.module.css';
 import Head from 'next/head';
-import pj from '../img/Base.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import Sprite from '../component/Sprite';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -37,16 +37,16 @@ export default function Home() {
 
     function handleKeyDown(event) {
       const { key } = event;
-    
+
       if (!keyStateRef.current[key]) {
         // Reiniciar todas las teclas
         Object.keys(keyStateRef.current).forEach(k => {
           keyStateRef.current[k] = false;
         });
-    
+
         keyStateRef.current[key] = true;
         setLastKeyPressed(key);
-    
+
         switch (key) {
           case 'a':
             setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveA}`);
@@ -73,7 +73,7 @@ export default function Home() {
     function handleKeyUp(event) {
       const { key } = event;
       keyStateRef.current[key] = false;
-    
+
       switch (key) {
         case 'a':
           setMovableDivClasses(prevClasses =>
@@ -160,8 +160,7 @@ export default function Home() {
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
-  
-  console.log(pjImagen.current)
+
   return (
     <>
       <Head>
@@ -172,13 +171,22 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center} ref={containerRef}>
-          <div className={movableDivClasses} ref={movableDivRef}></div>
+
+          {/* Personaje */}
+          {/* <div className={movableDivClasses} ref={movableDivRef}></div> */}
+
+          <div className={movableDivClasses} ref={movableDivRef}>
+          <Sprite
+          />
+
+          </div>
+
 
           <div className={styles.secondBox} ref={secondBoxRef}>
             <div className={styles.caja2}></div>
           </div>
           <Link href={'/pj'}>Moverse</Link>
-          <Image src={pj} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen}/>
+          <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen} />
         </div>
       </main>
     </>
@@ -187,4 +195,4 @@ export default function Home() {
 
 
 
-{/*  <div className={`${styles.caja} ${stylesMove.spriteMoveD}`}></div> */}
+{/*  <div className={`${styles.caja} ${stylesMove.spriteMoveD}`}></div> */ }

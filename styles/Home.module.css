@@ -51,6 +51,13 @@
   position: absolute;
   bottom:0;
 }
+.pj2{
+  position: absolute;
+  bottom:0;
+  right: 0;
+  background-color: wheat;
+
+}
 
 /* En el caso de ser 100% */
 
