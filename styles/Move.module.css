@@ -4,11 +4,10 @@
   top: 0;
   left: 0;
   transition: top 0.0001s, left 0.0001s; /* Añadido para suavizar el movimiento */
-  height: 90px;
+  height: 100px;
   width: 60px;
-  background-repeat: no-repeat;
+  background-image: url('/img/Sprites.svg');
   background-size: 650%; /* Ajusta el tamaño de la imagen */
-
 }
 .spriteNotMoveS{
   background-position: -15px 0px;

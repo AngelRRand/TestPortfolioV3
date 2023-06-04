@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Sprite = ({ movableDivClasses, movableDivRef }) => {
+const Sprite = ({ animation }) => {
     return (
-        <svg version="1.1" viewBox="5 2 20 30" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" >
+        <svg version="1.1" viewBox={animation} xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" >
             <rect x="75" y="1" width="1" height="1" fill="#1A1715" />
             <rect x="76" y="1" width="1" height="1" fill="#1A1715" />
             <rect x="77" y="1" width="1" height="1" fill="#1A1715" />

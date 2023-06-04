@@ -161,6 +161,7 @@ export default function Home() {
     };
   }, []);
 
+'`p'
   return (
     <>
       <Head>
@@ -173,13 +174,14 @@ export default function Home() {
         <div className={styles.center} ref={containerRef}>
 
           {/* Personaje */}
-          {/* <div className={movableDivClasses} ref={movableDivRef}></div> */}
+          <div className={movableDivClasses} ref={movableDivRef}></div> 
 
-          <div className={movableDivClasses} ref={movableDivRef}>
-          <Sprite
-          />
-
-          </div>
+        {/*  <Image src={"/img/Sprites.svg"} alt="" ref={movableDivRef} width={400} height={750} className={movableDivClasses} /> */}
+          {/* <div className={movableDivClasses} ref={movableDivRef}>
+            <Sprite
+              animation={animation}
+            />
+          </div> */}
 
 
           <div className={styles.secondBox} ref={secondBoxRef}>

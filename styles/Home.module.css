@@ -58,7 +58,11 @@
   background-color: wheat;
 
 }
-
+.NuevaCaja{
+  background-color: rgb(222, 154, 27);
+  width: 100px;
+  height: 100px;
+}
 /* En el caso de ser 100% */
 
 /* 
