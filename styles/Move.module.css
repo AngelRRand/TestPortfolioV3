@@ -3,7 +3,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  transition: top 0.0001s, left 0.0001s; /* Añadido para suavizar el movimiento */
+  transition: top 0.00001s, left 0.00001s; /* Añadido para suavizar el movimiento */
   height: 100px;
   width: 60px;
   background-image: url('/img/Sprites.svg');

@@ -63,6 +63,13 @@
   width: 100px;
   height: 100px;
 }
+
+
+
+.navegacion{
+  display: flex;
+  flex-direction: column;
+}
 /* En el caso de ser 100% */
 
 /* 
