@@ -2,17 +2,15 @@
 
 .sprite {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: top 0.00001s, left 0.00001s; /* Añadido para suavizar el movimiento */
+  top: 0px;
+  left: 0px;
+  transition: top 0.00001s, left 0.00001s; /* Added to smooth out the movement */
   height: 100px;
   width: 60px;
   background-image: url('/img/Sprites.svg');
-  background-size: 650%; /* Ajusta el tamaño de la imagen */
+  background-size: 650%; /* Adjust the size of the image */
   animation: 0.8s steps(4) infinite;
   background-position-x: -15px;
-
 }
 .spriteNotMoveS{
   background-position-y: 0px;
