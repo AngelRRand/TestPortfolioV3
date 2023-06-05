@@ -12,15 +12,16 @@ export default function Home() {
   const movableDivRef = useRef(null);
   const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
-
   const pjImagen = useRef(null);
 
   const keyStateRef = useRef({});
   const [lastKeyPressed, setLastKeyPressed] = useState(null);
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
 
-
+  /* Camara */
   const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
+
+
 
   useEffect(() => {
     const container = containerRef.current;
@@ -48,15 +49,6 @@ export default function Home() {
           movableDivRect.top < secondBoxRect.bottom
         );
     };
-
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-    const movableDivWidth = movableDiv.offsetWidth;
-    const movableDivHeight = movableDiv.offsetHeight;
-    const cameraX = movableDiv.offsetLeft - containerWidth / 2 + movableDivWidth / 2 - movableDivWidth / 2;
-    const cameraY = movableDiv.offsetTop - containerHeight / 2 + movableDivHeight / 2 - movableDivHeight / 2;
-    setCameraPosition({ x: cameraX, y: cameraY });
-
 
     function handleKeyDown(event) {
       const { key } = event;
@@ -108,63 +100,64 @@ export default function Home() {
         setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveW}`);
       }
     }
+
     function moveLeft() {
       const currentLeft = parseInt(movableDiv.style.left || '0');
+      console.log(currentLeft)
       if (currentLeft > 0) {
         movableDiv.style.left = `${currentLeft - step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft - step }));
       }
       if (keyStateRef.current['a'] && !isColliding()) {
         requestAnimationFrame(moveLeft);
       } else if (isColliding()) {
         movableDiv.style.left = `${currentLeft + step * pushFactor}px`;
       }
-      setCameraPosition(prevPosition => ({ ...prevPosition, x: currentLeft - step - movableDivWidth / 2 }));
     }
-    
+
+
     function moveUp() {
       const currentTop = parseInt(movableDiv.style.top || '0');
       if (currentTop > 0) {
         movableDiv.style.top = `${currentTop - step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop - step }));
       }
       if (keyStateRef.current['w'] && !isColliding()) {
         requestAnimationFrame(moveUp);
       } else if (isColliding()) {
         movableDiv.style.top = `${currentTop + step * pushFactor}px`;
       }
-      setCameraPosition(prevPosition => ({ ...prevPosition, y: currentTop - step - movableDivHeight / 2 }));
     }
-    
+
     function moveDown() {
       const currentTop = parseInt(movableDiv.style.top || '0');
       const movableDivHeight = movableDiv.offsetHeight;
       const containerHeight = container.offsetHeight;
       if (currentTop + movableDivHeight < containerHeight) {
         movableDiv.style.top = `${currentTop + step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop + step }));
       }
       if (keyStateRef.current['s'] && !isColliding()) {
         requestAnimationFrame(moveDown);
       } else if (isColliding()) {
         movableDiv.style.top = `${currentTop - step * pushFactor}px`;
       }
-      setCameraPosition(prevPosition => ({ ...prevPosition, y: currentTop + step - movableDivHeight / 2 }));
     }
-    
+
     function moveRight() {
       const currentLeft = parseInt(movableDiv.style.left || '0');
       const movableDivWidth = movableDiv.offsetWidth;
       const containerWidth = container.offsetWidth;
       if (currentLeft + movableDivWidth < containerWidth) {
         movableDiv.style.left = `${currentLeft + step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft + step }));
       }
       if (keyStateRef.current['d'] && !isColliding()) {
         requestAnimationFrame(moveRight);
       } else if (isColliding()) {
         movableDiv.style.left = `${currentLeft - step * pushFactor}px`;
       }
-      setCameraPosition(prevPosition => ({ ...prevPosition, x: currentLeft + step - movableDivWidth / 2 }));
     }
-    
-
 
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
@@ -175,7 +168,14 @@ export default function Home() {
     };
   }, []);
 
-
+  const containerStyle = {
+    position: 'relative',
+    border: '1px solid rgb(241, 241, 241)',
+    backgroundColor: 'rgb(199, 196, 196)',
+    height: '100vh',
+    width: '100vw',
+    transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)`
+  };
 
   return (
     <>
@@ -186,7 +186,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.center} ref={containerRef} style={{ transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)` }}>
+        <div className={styles.center} ref={containerRef} style={containerStyle}>
 
           {/* Personaje */}
           <div className={movableDivClasses} ref={movableDivRef}></div>
@@ -202,14 +202,13 @@ export default function Home() {
 
 
 
-          <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen} />
+          <div className={styles.navegacion}>
+            <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen} />
+            <Link href={'/pj'}>PersonajePrueba</Link>
+            <Link href={'/PruebaSprites'}>SpritesPrueba</Link>
+          </div>
         </div>
         {/* Navegacion */}
-        <div className={styles.navegacion}>
-
-          <Link href={'/pj'}>PersonajePrueba</Link>
-          <Link href={'/PruebaSprites'}>SpritesPrueba</Link>
-        </div>
       </main>
     </>
   );
