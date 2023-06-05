@@ -1,29 +1,32 @@
 .main {
-  height: 100vh;
+  height: 200vh;
 }
 
 .center {
   position: relative;
   border: 1px solid rgb(241, 241, 241);
   background-color: rgb(199, 196, 196);
-
   height: 80vh;
   width: 90vw;
-  overflow: hidden; /* Añadido para ocultar el desbordamiento del contenido */
+  
 }
 
-.secondBox {
+.obstacle {
   position: absolute;
-  top: 30vh;
-  left: 30vh;
-  transition: top 0.0001s, left 0.0001s;
+  background-color: rgb(199, 188, 34);
+  width: 100px;
+  height: 100px;
+  top: 200px; /* Ajusta la posición vertical según tus necesidades */
+  left: 300px; /* Ajusta la posición horizontal según tus necesidades */
 }
 
-
-.caja2{
-  height: 15vh;
-  width: 35vh;
-  background-color: crimson;
+.obstacle2{
+  position: absolute;
+  background-color: rgba(42, 28, 233, 0.87);
+  width: 100px;
+  height: 100px;
+  top: 500px; /* Ajusta la posición vertical según tus necesidades */
+  left: 750px; /* Ajusta la posición horizontal según tus necesidades */
 }
 
 .caja3{

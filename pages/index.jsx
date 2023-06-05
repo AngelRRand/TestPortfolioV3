@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import styles from '@/styles/Home.module.css';
 import stylesMove from '@/styles/Move.module.css';
@@ -9,6 +10,7 @@ import Sprite from '../component/Sprite';
 export default function Home() {
   const containerRef = useRef(null);
   const movableDivRef = useRef(null);
+  const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
   const pjImagen = useRef(null);
 
@@ -16,23 +18,37 @@ export default function Home() {
   const [lastKeyPressed, setLastKeyPressed] = useState(null);
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
 
+  /* Camara */
+  const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
+  const [characterPosition, setCharacterPosition] = useState({ x: 0, y: 0 });
+
+
+
   useEffect(() => {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
     const secondBox = secondBoxRef.current;
+    const primerBox = primerBoxRef.current;
+
     const step = 2;
     const pushFactor = 1;
 
     const isColliding = () => {
       const movableDivRect = movableDiv.getBoundingClientRect();
       const secondBoxRect = secondBox.getBoundingClientRect();
+      const primerBoxRect = primerBox.getBoundingClientRect();
 
       return (
-        movableDivRect.right > secondBoxRect.left &&
-        movableDivRect.left < secondBoxRect.right &&
-        movableDivRect.bottom > secondBoxRect.top &&
-        movableDivRect.top < secondBoxRect.bottom
-      );
+        movableDivRect.right > primerBoxRect.left &&
+        movableDivRect.left < primerBoxRect.right &&
+        movableDivRect.bottom > primerBoxRect.top &&
+        movableDivRect.top < primerBoxRect.bottom
+      ) || (
+          movableDivRect.right > secondBoxRect.left &&
+          movableDivRect.left < secondBoxRect.right &&
+          movableDivRect.bottom > secondBoxRect.top &&
+          movableDivRect.top < secondBoxRect.bottom
+        );
     };
 
     function handleKeyDown(event) {
@@ -88,8 +104,10 @@ export default function Home() {
 
     function moveLeft() {
       const currentLeft = parseInt(movableDiv.style.left || '0');
+      console.log(currentLeft)
       if (currentLeft > 0) {
         movableDiv.style.left = `${currentLeft - step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft - step }));
       }
       if (keyStateRef.current['a'] && !isColliding()) {
         requestAnimationFrame(moveLeft);
@@ -98,10 +116,12 @@ export default function Home() {
       }
     }
 
+
     function moveUp() {
       const currentTop = parseInt(movableDiv.style.top || '0');
       if (currentTop > 0) {
         movableDiv.style.top = `${currentTop - step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop - step }));
       }
       if (keyStateRef.current['w'] && !isColliding()) {
         requestAnimationFrame(moveUp);
@@ -116,6 +136,7 @@ export default function Home() {
       const containerHeight = container.offsetHeight;
       if (currentTop + movableDivHeight < containerHeight) {
         movableDiv.style.top = `${currentTop + step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop + step }));
       }
       if (keyStateRef.current['s'] && !isColliding()) {
         requestAnimationFrame(moveDown);
@@ -130,6 +151,7 @@ export default function Home() {
       const containerWidth = container.offsetWidth;
       if (currentLeft + movableDivWidth < containerWidth) {
         movableDiv.style.left = `${currentLeft + step}px`;
+        setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft + step }));
       }
       if (keyStateRef.current['d'] && !isColliding()) {
         requestAnimationFrame(moveRight);
@@ -147,8 +169,15 @@ export default function Home() {
     };
   }, []);
 
+  const containerStyle = {
+    position: 'relative',
+    border: '1px solid rgb(241, 241, 241)',
+    backgroundColor: 'rgb(199, 196, 196)',
+    height: '80vh',
+    width: '90vw',
+    transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)`
+  };
 
-  
   return (
     <>
       <Head>
@@ -158,7 +187,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.center} ref={containerRef}>
+        <div className={styles.center} ref={containerRef} style={containerStyle}>
 
           {/* Personaje */}
           <div className={movableDivClasses} ref={movableDivRef}></div>
@@ -166,9 +195,11 @@ export default function Home() {
 
           {/* Obstaculo */}
 
-          <div className={styles.secondBox} ref={secondBoxRef}>
-            <div className={styles.caja2}></div>
-          </div>
+          <div className={styles.obstacle} ref={primerBoxRef} />
+
+          <div className={styles.obstacle2} ref={secondBoxRef} />
+
+
 
 
 
@@ -184,6 +215,7 @@ export default function Home() {
     </>
   );
 }
+
 
 
 {/* <Image src={"/img/Sprites.svg"} alt="" ref={movableDivRef} width={400} height={750}/>  */ }
