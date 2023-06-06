@@ -195,10 +195,10 @@ export default function Home() {
           {/* Obstaculo */}
 
           <div className={styles.obstacle} ref={primerBoxRef} />
-
           <div className={styles.obstacle2} ref={secondBoxRef} />
 
-
+          <Image src={"/img/casa.svg"} className={styles.casa} width={250} height={150} />
+    
 
 
 

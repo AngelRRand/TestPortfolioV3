@@ -17,20 +17,30 @@
 
 .obstacle {
   position: absolute;
-  background-color: rgb(199, 188, 34);
-  width: 200px;
-  height: 100px;
-  top: 200px; /* Ajusta la posición vertical según tus necesidades */
-  left: 200px; /* Ajusta la posición horizontal según tus necesidades */
+  width: 225px;
+  height: 55px;
+  top: 150px; 
+  left: 115px; 
+  z-index: 1000;
+  background-color: rgba(42, 28, 233, 0.87);
+
+}
+
+.casa{
+  position: absolute;
+  top: 150px; 
+  left: 100px; 
 }
 
 .obstacle2{
   position: absolute;
   background-color: rgba(42, 28, 233, 0.87);
-  width: 100px;
-  height: 100px;
-  top: 500px; /* Ajusta la posición vertical según tus necesidades */
-  left: 750px; /* Ajusta la posición horizontal según tus necesidades */
+  width: 5px;
+  height: 150px;
+  top: 150px; 
+  left: 455px; 
+  z-index: 1000;
+
 }
 
 .caja3{
