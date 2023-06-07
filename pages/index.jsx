@@ -170,7 +170,7 @@ export default function Home() {
 
   const containerStyle = {
     position: 'relative',
-    border: '1px solid rgb(241, 241, 241)',
+    border: '1px solid rgb(22, 22, 22)',
     backgroundColor: 'rgb(199, 196, 196)',
     height: '100vh',
     width: '100vw',
@@ -185,8 +185,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className={styles.main}>
+
         <div className={styles.center} ref={containerRef} style={containerStyle}>
+
+          <Image src={"/img/mapa.gif"} alt="" className={styles.backgroundImage} width={100} height={100} />
+          <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={100} height={100} />
+          <div className={styles.obstacle2} ref={secondBoxRef} />
 
           {/* Personaje */}
           <div className={movableDivClasses} ref={movableDivRef}></div>
@@ -195,10 +201,8 @@ export default function Home() {
           {/* Obstaculo */}
 
           <div className={styles.obstacle} ref={primerBoxRef} />
-          <div className={styles.obstacle2} ref={secondBoxRef} />
 
-          <Image src={"/img/casa.svg"} className={styles.casa} width={250} height={150} />
-    
+
 
 
 
@@ -207,7 +211,10 @@ export default function Home() {
             <Link href={'/pj'}>PersonajePrueba</Link>
             <Link href={'/PruebaSprites'}>SpritesPrueba</Link>
           </div>
+
         </div>
+
+
         {/* Navegacion */}
       </main>
     </>
