@@ -70,6 +70,7 @@
   height: 400px;
   grid-area: 2 / 19 / 3 / 20;
   z-index: 1000;
+  background-color: rgba(42, 28, 233, 0.87);
 
 }
 

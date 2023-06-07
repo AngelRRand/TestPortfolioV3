@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import styles from '@/styles/Home.module.css';
 import stylesMove from '@/styles/Move.module.css';
@@ -21,13 +20,13 @@ export default function Home() {
   /* Camara */
   const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
 
-
-
   useEffect(() => {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
     const secondBox = secondBoxRef.current;
     const primerBox = primerBoxRef.current;
+
+    movableDiv.style.bottom = '0px';
 
     const step = 2;
     const pushFactor = 1;
@@ -36,20 +35,28 @@ export default function Home() {
       const movableDivRect = movableDiv.getBoundingClientRect();
       const secondBoxRect = secondBox.getBoundingClientRect();
       const primerBoxRect = primerBox.getBoundingClientRect();
-
+      
+      const containerRect = container.getBoundingClientRect(); // Obtener posición del contenedor
+      
+      const movableDivAdjustedRect = {
+        top: movableDivRect.top + containerRect.top, // Ajustar la posición del personaje
+        bottom: movableDivRect.bottom + containerRect.top,
+        left: movableDivRect.left + containerRect.left,
+        right: movableDivRect.right + containerRect.left
+      };
+      
       return (
-        movableDivRect.right > primerBoxRect.left &&
-        movableDivRect.left < primerBoxRect.right &&
-        movableDivRect.bottom > primerBoxRect.top &&
-        movableDivRect.top < primerBoxRect.bottom
+        movableDivAdjustedRect.right > primerBoxRect.left &&
+        movableDivAdjustedRect.left < primerBoxRect.right &&
+        movableDivAdjustedRect.bottom > primerBoxRect.top &&
+        movableDivAdjustedRect.top < primerBoxRect.bottom
       ) || (
-          movableDivRect.right > secondBoxRect.left &&
-          movableDivRect.left < secondBoxRect.right &&
-          movableDivRect.bottom > secondBoxRect.top &&
-          movableDivRect.top < secondBoxRect.bottom
-        );
+        movableDivAdjustedRect.right > secondBoxRect.left &&
+        movableDivAdjustedRect.left < secondBoxRect.right &&
+        movableDivAdjustedRect.bottom > secondBoxRect.top &&
+        movableDivAdjustedRect.top < secondBoxRect.bottom
+      );
     };
-
     function handleKeyDown(event) {
       const { key } = event;
 
@@ -102,8 +109,7 @@ export default function Home() {
     }
 
     function moveLeft() {
-      const currentLeft = parseInt(movableDiv.style.left || '0');
-      console.log(currentLeft)
+      const currentLeft = movableDiv.offsetLeft;
       if (currentLeft > 0) {
         movableDiv.style.left = `${currentLeft - step}px`;
         setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft - step }));
@@ -115,9 +121,8 @@ export default function Home() {
       }
     }
 
-
     function moveUp() {
-      const currentTop = parseInt(movableDiv.style.top || '0');
+      const currentTop = movableDiv.offsetTop;
       if (currentTop > 0) {
         movableDiv.style.top = `${currentTop - step}px`;
         setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop - step }));
@@ -130,7 +135,7 @@ export default function Home() {
     }
 
     function moveDown() {
-      const currentTop = parseInt(movableDiv.style.top || '0');
+      const currentTop = movableDiv.offsetTop;
       const movableDivHeight = movableDiv.offsetHeight;
       const containerHeight = container.offsetHeight;
       if (currentTop + movableDivHeight < containerHeight) {
@@ -145,7 +150,7 @@ export default function Home() {
     }
 
     function moveRight() {
-      const currentLeft = parseInt(movableDiv.style.left || '0');
+      const currentLeft = movableDiv.offsetLeft;
       const movableDivWidth = movableDiv.offsetWidth;
       const containerWidth = container.offsetWidth;
       if (currentLeft + movableDivWidth < containerWidth) {
@@ -161,6 +166,13 @@ export default function Home() {
 
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
+
+    const movableDivRect = movableDiv.getBoundingClientRect();
+    setCameraPosition((prevPosition) => ({
+      ...prevPosition,
+      x: movableDivRect.left - container.offsetWidth / 2 + movableDivRect.width / 2,
+      y: movableDivRect.top - container.offsetHeight / 2 + movableDivRect.height / 2
+    }));
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -210,6 +222,8 @@ export default function Home() {
             <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen} />
             <Link href={'/pj'}>PersonajePrueba</Link>
             <Link href={'/PruebaSprites'}>SpritesPrueba</Link>
+            <Link href={'/mapaCamara'}>mapaCamara</Link>
+
           </div>
 
         </div>
@@ -220,7 +234,6 @@ export default function Home() {
     </>
   );
 }
-
 
 
 {/* <Image src={"/img/Sprites.svg"} alt="" ref={movableDivRef} width={400} height={750}/>  */ }

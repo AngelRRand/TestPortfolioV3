@@ -11,3 +11,39 @@ body {
 img {
     image-rendering: pixelated;
 }
+
+
+.espacio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200vw;
+    /* Ajustar al tamaño deseado */
+    height: 200vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.mapa {
+    width: 100vw;
+    /* Tamaño del mapa */
+    height: 100vh;
+    position: relative;
+    border: 1px solid #000;
+    /* Estilo del borde del mapa */
+    background-color: #ccc;
+    /* Color de fondo del mapa */
+}
+
+.personaje {
+    width: 32px;
+    /* Tamaño del personaje */
+    height: 32px;
+    position: absolute;
+    background-color: #f00;
+    /* Color de fondo del personaje */
+    border: 1px solid #000;
+    /* Estilo del borde del personaje */
+    transition: all 0.3s ease;
+    /* Transición suave al mover el personaje */
+}
