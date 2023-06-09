@@ -12,58 +12,65 @@ export default function Home() {
   const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
   const pjImagen = useRef(null);
-
+  
   const keyStateRef = useRef({});
+  const pressedKeysRef = useRef([]);
   const [lastKeyPressed, setLastKeyPressed] = useState(null);
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
-
+  
   /* Camara */
-  const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
-
+  const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 600 });
+  
+  let animationFrameId;
+  
   useEffect(() => {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
     const secondBox = secondBoxRef.current;
     const primerBox = primerBoxRef.current;
-
-    movableDiv.style.bottom = '0px';
-
+  
+    movableDiv.style.bottom = '100px';
+  
     const step = 2;
     const pushFactor = 1;
-
+  
     const isColliding = () => {
-      const movableDivRect = movableDiv.getBoundingClientRect();
-      const secondBoxRect = secondBox.getBoundingClientRect();
-      const primerBoxRect = primerBox.getBoundingClientRect();
-      
-      const containerRect = container.getBoundingClientRect(); // Obtener posición del contenedor
-      
-      const movableDivAdjustedRect = {
-        top: movableDivRect.top + containerRect.top, // Ajustar la posición del personaje
-        bottom: movableDivRect.bottom + containerRect.top,
-        left: movableDivRect.left + containerRect.left,
-        right: movableDivRect.right + containerRect.left
-      };
-      
+      const movableDivLeft = movableDiv.offsetLeft;
+      const movableDivRight = movableDivLeft + movableDiv.offsetWidth;
+      const movableDivTop = movableDiv.offsetTop;
+      const movableDivBottom = movableDivTop + movableDiv.offsetHeight;
+  
+      const primerBoxLeft = primerBox.offsetLeft;
+      const primerBoxRight = primerBoxLeft + primerBox.offsetWidth;
+      const primerBoxTop = primerBox.offsetTop;
+      const primerBoxBottom = primerBoxTop + primerBox.offsetHeight;
+  
+      const secondBoxLeft = secondBox.offsetLeft;
+      const secondBoxRight = secondBoxLeft + secondBox.offsetWidth;
+      const secondBoxTop = secondBox.offsetTop;
+      const secondBoxBottom = secondBoxTop + secondBox.offsetHeight;
+  
       return (
-        movableDivAdjustedRect.right > primerBoxRect.left &&
-        movableDivAdjustedRect.left < primerBoxRect.right &&
-        movableDivAdjustedRect.bottom > primerBoxRect.top &&
-        movableDivAdjustedRect.top < primerBoxRect.bottom
+        movableDivRight > primerBoxLeft &&
+        movableDivLeft < primerBoxRight &&
+        movableDivBottom > primerBoxTop &&
+        movableDivTop < primerBoxBottom
       ) || (
-        movableDivAdjustedRect.right > secondBoxRect.left &&
-        movableDivAdjustedRect.left < secondBoxRect.right &&
-        movableDivAdjustedRect.bottom > secondBoxRect.top &&
-        movableDivAdjustedRect.top < secondBoxRect.bottom
+        movableDivRight > secondBoxLeft &&
+        movableDivLeft < secondBoxRight &&
+        movableDivBottom > secondBoxTop &&
+        movableDivTop < secondBoxBottom
       );
     };
+  
     function handleKeyDown(event) {
       const { key } = event;
-
+  
       if (!keyStateRef.current[key]) {
         keyStateRef.current[key] = true;
+        pressedKeysRef.current.push(key);
         setLastKeyPressed(key);
-
+  
         switch (key) {
           case 'a':
             setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveA}`);
@@ -86,28 +93,52 @@ export default function Home() {
         }
       }
     }
-
+  
     function handleKeyUp(event) {
       const { key } = event;
       keyStateRef.current[key] = false;
-
-      if (key === 's' && !keyStateRef.current['w']) {
-        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
+      const index = pressedKeysRef.current.indexOf(key);
+      if (index !== -1) {
+        pressedKeysRef.current.splice(index, 1);
       }
-
-      if (key === 'd' && !keyStateRef.current['a']) {
-        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveD}`);
-      }
-
-      if (key === 'a' && !keyStateRef.current['d']) {
-        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveA}`);
-      }
-
-      if (key === 'w' && !keyStateRef.current['s']) {
-        setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteNotMoveW}`);
+    
+      if (pressedKeysRef.current.length === 0) {
+        const { w, a, s, d } = keyStateRef.current;
+        const spriteNotMove = `${stylesMove.sprite} ${stylesMove.spriteNotMove}`;
+    
+        if (key === 's' && !w) {
+          setMovableDivClasses(`${spriteNotMove} ${stylesMove.spriteNotMoveS}`);
+        } else if (key === 'd' && !a) {
+          setMovableDivClasses(`${spriteNotMove} ${stylesMove.spriteNotMoveD}`);
+        } else if (key === 'a' && !d) {
+          setMovableDivClasses(`${spriteNotMove} ${stylesMove.spriteNotMoveA}`);
+        } else if (key === 'w' && !s) {
+          setMovableDivClasses(`${spriteNotMove} ${stylesMove.spriteNotMoveW}`);
+        } else if (key === lastKeyPressed) {
+          // Si la tecla soltada es la última tecla presionada, actualiza las clases según la última tecla presionada
+          switch (lastKeyPressed) {
+            case 'a':
+              setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveA}`);
+              break;
+            case 'w':
+              setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveW}`);
+              break;
+            case 's':
+              setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveS}`);
+              break;
+            case 'd':
+              setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveD}`);
+              break;
+            default:
+              setMovableDivClasses(stylesMove.sprite);
+              break;
+          }
+        } else {
+          setMovableDivClasses(stylesMove.sprite);
+        }
       }
     }
-
+  
     function moveLeft() {
       const currentLeft = movableDiv.offsetLeft;
       if (currentLeft > 0) {
@@ -115,12 +146,12 @@ export default function Home() {
         setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft - step }));
       }
       if (keyStateRef.current['a'] && !isColliding()) {
-        requestAnimationFrame(moveLeft);
+        animationFrameId = requestAnimationFrame(moveLeft);
       } else if (isColliding()) {
         movableDiv.style.left = `${currentLeft + step * pushFactor}px`;
       }
     }
-
+  
     function moveUp() {
       const currentTop = movableDiv.offsetTop;
       if (currentTop > 0) {
@@ -128,12 +159,12 @@ export default function Home() {
         setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop - step }));
       }
       if (keyStateRef.current['w'] && !isColliding()) {
-        requestAnimationFrame(moveUp);
+        animationFrameId = requestAnimationFrame(moveUp);
       } else if (isColliding()) {
         movableDiv.style.top = `${currentTop + step * pushFactor}px`;
       }
     }
-
+  
     function moveDown() {
       const currentTop = movableDiv.offsetTop;
       const movableDivHeight = movableDiv.offsetHeight;
@@ -143,12 +174,12 @@ export default function Home() {
         setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop + step }));
       }
       if (keyStateRef.current['s'] && !isColliding()) {
-        requestAnimationFrame(moveDown);
+        animationFrameId = requestAnimationFrame(moveDown);
       } else if (isColliding()) {
         movableDiv.style.top = `${currentTop - step * pushFactor}px`;
       }
     }
-
+  
     function moveRight() {
       const currentLeft = movableDiv.offsetLeft;
       const movableDivWidth = movableDiv.offsetWidth;
@@ -158,27 +189,22 @@ export default function Home() {
         setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft + step }));
       }
       if (keyStateRef.current['d'] && !isColliding()) {
-        requestAnimationFrame(moveRight);
+        animationFrameId = requestAnimationFrame(moveRight);
       } else if (isColliding()) {
         movableDiv.style.left = `${currentLeft - step * pushFactor}px`;
       }
     }
-
+  
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
-
-    const movableDivRect = movableDiv.getBoundingClientRect();
-    setCameraPosition((prevPosition) => ({
-      ...prevPosition,
-      x: movableDivRect.left - container.offsetWidth / 2 + movableDivRect.width / 2,
-      y: movableDivRect.top - container.offsetHeight / 2 + movableDivRect.height / 2
-    }));
-
+  
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
+  
+
 
   const containerStyle = {
     position: 'relative',
