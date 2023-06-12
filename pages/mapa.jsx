@@ -16,16 +16,16 @@ const Mapa = () => {
 
     // Actualizar las coordenadas según la tecla presionada
     switch (key) {
-      case 'ArrowUp':
+      case 'w':
         y -= 1;
         break;
-      case 'ArrowDown':
+      case 's':
         y += 1;
         break;
-      case 'ArrowLeft':
+      case 'a':
         x -= 1;
         break;
-      case 'ArrowRight':
+      case 'd':
         x += 1;
         break;
       default:

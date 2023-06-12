@@ -248,7 +248,7 @@ export default function Home() {
             <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen} />
             <Link href={'/pj'}>PersonajePrueba</Link>
             <Link href={'/PruebaSprites'}>SpritesPrueba</Link>
-            <Link href={'/mapaCamara'}>mapaCamara</Link>
+            <Link href={'/mapa'}>mapaCamara</Link>
 
           </div>
 
