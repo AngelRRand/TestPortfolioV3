@@ -28,7 +28,7 @@ export default function Home() {
   
     movableDiv.style.bottom = '100px';
   
-    const step = 2;
+    const step = 3;
     const pushFactor = 1;
   
     const isColliding = () => {
