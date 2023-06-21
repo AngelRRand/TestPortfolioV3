@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '@/styles/Home.module.css';
 import stylesMove from '@/styles/Move.module.css';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
-import Sprite from '../component/Sprite';
+import styles from '@/styles/Home.module.css';
 
 export default function Home() {
   const containerRef = useRef(null);
   const movableDivRef = useRef(null);
   const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
-  const pjImagen = useRef(null);
   
   const keyStateRef = useRef({});
   const pressedKeysRef = useRef([]);
@@ -210,8 +207,8 @@ export default function Home() {
     position: 'relative',
     border: '1px solid rgb(22, 22, 22)',
     backgroundColor: 'rgb(199, 196, 196)',
-    height: '150vh',
-    width: '150vw',
+    height: '200vh',
+    width: '200vw',
     transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)`
   };
 
@@ -229,26 +226,20 @@ export default function Home() {
         <div className={styles.center} ref={containerRef} style={containerStyle}>
           <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={100} height={100} />
           <div className={styles.obstacle2} ref={secondBoxRef} />
-
+          <div className={styles.obstacle} ref={primerBoxRef} />
           {/* Personaje */}
           <div className={movableDivClasses} ref={movableDivRef}></div>
 
 
           {/* Obstaculo */}
 
-          <div className={styles.obstacle} ref={primerBoxRef} />
+          
 
 
 
 
 
-          <div className={styles.navegacion}>
-            <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} ref={pjImagen} />
-            <Link href={'/pj'}>PersonajePrueba</Link>
-            <Link href={'/PruebaSprites'}>SpritesPrueba</Link>
-            <Link href={'/mapa'}>mapaCamara</Link>
-
-          </div>
+        
 
         </div>
 
