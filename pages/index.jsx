@@ -210,8 +210,8 @@ export default function Home() {
     position: 'relative',
     border: '1px solid rgb(22, 22, 22)',
     backgroundColor: 'rgb(199, 196, 196)',
-    height: '100vh',
-    width: '100vw',
+    height: '150vh',
+    width: '150vw',
     transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)`
   };
 
@@ -227,8 +227,6 @@ export default function Home() {
       <main className={styles.main}>
 
         <div className={styles.center} ref={containerRef} style={containerStyle}>
-
-          <Image src={"/img/mapa.gif"} alt="" className={styles.backgroundImage} width={100} height={100} />
           <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={100} height={100} />
           <div className={styles.obstacle2} ref={secondBoxRef} />
 

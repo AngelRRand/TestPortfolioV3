@@ -10,9 +10,14 @@ const Pj = () => {
     setColor('#eb74ed')
     setColor2('#d861e5')
   }
+  const changeColor2 = () => {
+    setColor('#b0ed74')
+    setColor2('#3dad44')
+  }
   return (
     <div>
-      <div onClick={()=> changeColor()} className={styles.caja2}></div>
+      <div onClick={()=> changeColor()} className={styles.cambiodecolor}></div>
+      <div onClick={()=> changeColor2()} className={styles.cambiodecolor2}></div>
       <Personaje 
         color={color}
         segundoColor={color2}
