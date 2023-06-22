@@ -27,66 +27,41 @@ export default function Home() {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
 
-    const forBox = forBoxRef.current;
-    const threeBox = threeBoxRef.current;
-    const secondBox = secondBoxRef.current;
-    const primerBox = primerBoxRef.current;
   
     movableDiv.style.bottom = '50vh';
     movableDiv.style.left = '60vw';
+    const boxes = [forBoxRef.current, threeBoxRef.current, secondBoxRef.current, primerBoxRef.current];
 
   
-    const step = 5;
-    const pushFactor = 1.5;
+    const step = 3;
+    const pushFactor = 1.3;
   
     const isColliding = () => {
       const movableDivLeft = movableDiv.offsetLeft;
       const movableDivRight = movableDivLeft + movableDiv.offsetWidth;
       const movableDivTop = movableDiv.offsetTop;
       const movableDivBottom = movableDivTop + movableDiv.offsetHeight;
-  
-      const primerBoxLeft = primerBox.offsetLeft;
-      const primerBoxRight = primerBoxLeft + primerBox.offsetWidth;
-      const primerBoxTop = primerBox.offsetTop;
-      const primerBoxBottom = primerBoxTop + primerBox.offsetHeight;
-  
-      const secondBoxLeft = secondBox.offsetLeft;
-      const secondBoxRight = secondBoxLeft + secondBox.offsetWidth;
-      const secondBoxTop = secondBox.offsetTop;
-      const secondBoxBottom = secondBoxTop + secondBox.offsetHeight;
-
-      const threeBoxLeft = threeBox.offsetLeft;
-      const threeBoxRight = threeBoxLeft + threeBox.offsetWidth;
-      const threeBoxTop = threeBox.offsetTop;
-      const threeBoxBottom = threeBoxTop + threeBox.offsetHeight;
-
-      const forBoxLeft = forBox.offsetLeft;
-      const forBoxRight = forBoxLeft + forBox.offsetWidth;
-      const forBoxTop = forBox.offsetTop;
-      const forBoxBottom = forBoxTop + forBox.offsetHeight;
-  
-      return (
-        movableDivRight > primerBoxLeft &&
-        movableDivLeft < primerBoxRight &&
-        movableDivBottom > primerBoxTop &&
-        movableDivTop < primerBoxBottom
-      ) || (
-        movableDivRight > secondBoxLeft &&
-        movableDivLeft < secondBoxRight &&
-        movableDivBottom > secondBoxTop &&
-        movableDivTop < secondBoxBottom
-      ) || (
-        movableDivRight > threeBoxLeft &&
-        movableDivLeft < threeBoxRight &&
-        movableDivBottom > threeBoxTop &&
-        movableDivTop < threeBoxBottom
-      ) || (
-        movableDivRight > forBoxLeft &&
-        movableDivLeft < forBoxRight &&
-        movableDivBottom > forBoxTop &&
-        movableDivTop < forBoxBottom
-      );
+    
+      for (let i = 0; i < boxes.length; i++) {
+        const box = boxes[i];
+        const boxLeft = box.offsetLeft;
+        const boxRight = boxLeft + box.offsetWidth;
+        const boxTop = box.offsetTop;
+        const boxBottom = boxTop + box.offsetHeight;
+    
+        if (
+          movableDivRight > boxLeft &&
+          movableDivLeft < boxRight &&
+          movableDivBottom > boxTop &&
+          movableDivTop < boxBottom
+        ) {
+          return true;
+        }
+      }
+    
+      return false;
     };
+    
   
     function handleKeyDown(event) {
       const { key } = event;
