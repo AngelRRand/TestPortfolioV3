@@ -2,11 +2,11 @@
 
 .sprite {
   position: absolute;
-  transition: top 0.00001s, left 0.00001s; /* Añadido para suavizar el movimiento */
+  transition: top 0.00001s, left 0.00001s; 
   height: 100px;
   width: 60px;
   background-image: url('/img/Sprites.svg');
-  background-size: 650%; /* Ajusta el tamaño de la imagen */
+  background-size: 650%; 
   animation: 0.8s steps(4) infinite;
   background-position-x: -15px;
   z-index: 10000;

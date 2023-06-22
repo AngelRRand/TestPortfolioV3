@@ -9,6 +9,9 @@ export default function Home() {
   const movableDivRef = useRef(null);
   const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
+  const threeBoxRef = useRef(null);
+  const forBoxRef = useRef(null);
+
   
   const keyStateRef = useRef({});
   const pressedKeysRef = useRef([]);
@@ -16,20 +19,25 @@ export default function Home() {
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
   
   /* Camara */
-  const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 600 });
+  const [cameraPosition, setCameraPosition] = useState({ x: 800, y: 1300 });
   
   let animationFrameId;
   
   useEffect(() => {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
+
+    const forBox = forBoxRef.current;
+    const threeBox = threeBoxRef.current;
     const secondBox = secondBoxRef.current;
     const primerBox = primerBoxRef.current;
   
-    movableDiv.style.bottom = '100px';
+    movableDiv.style.bottom = '50vh';
+    movableDiv.style.left = '60vw';
+
   
-    const step = 3;
-    const pushFactor = 1;
+    const step = 5;
+    const pushFactor = 1.5;
   
     const isColliding = () => {
       const movableDivLeft = movableDiv.offsetLeft;
@@ -46,6 +54,16 @@ export default function Home() {
       const secondBoxRight = secondBoxLeft + secondBox.offsetWidth;
       const secondBoxTop = secondBox.offsetTop;
       const secondBoxBottom = secondBoxTop + secondBox.offsetHeight;
+
+      const threeBoxLeft = threeBox.offsetLeft;
+      const threeBoxRight = threeBoxLeft + threeBox.offsetWidth;
+      const threeBoxTop = threeBox.offsetTop;
+      const threeBoxBottom = threeBoxTop + threeBox.offsetHeight;
+
+      const forBoxLeft = forBox.offsetLeft;
+      const forBoxRight = forBoxLeft + forBox.offsetWidth;
+      const forBoxTop = forBox.offsetTop;
+      const forBoxBottom = forBoxTop + forBox.offsetHeight;
   
       return (
         movableDivRight > primerBoxLeft &&
@@ -57,6 +75,16 @@ export default function Home() {
         movableDivLeft < secondBoxRight &&
         movableDivBottom > secondBoxTop &&
         movableDivTop < secondBoxBottom
+      ) || (
+        movableDivRight > threeBoxLeft &&
+        movableDivLeft < threeBoxRight &&
+        movableDivBottom > threeBoxTop &&
+        movableDivTop < threeBoxBottom
+      ) || (
+        movableDivRight > forBoxLeft &&
+        movableDivLeft < forBoxRight &&
+        movableDivBottom > forBoxTop &&
+        movableDivTop < forBoxBottom
       );
     };
   
@@ -207,8 +235,8 @@ export default function Home() {
     position: 'relative',
     border: '1px solid rgb(22, 22, 22)',
     backgroundColor: 'rgb(199, 196, 196)',
-    height: '200vh',
-    width: '200vw',
+    height: '250vh',
+    width: '250vw',
     transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)`
   };
 
@@ -225,8 +253,11 @@ export default function Home() {
 
         <div className={styles.center} ref={containerRef} style={containerStyle}>
           <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={100} height={100} />
+          <div className={styles.obstacle4} ref={forBoxRef} />
+          <div className={styles.obstacle3} ref={threeBoxRef} />
           <div className={styles.obstacle2} ref={secondBoxRef} />
           <div className={styles.obstacle} ref={primerBoxRef} />
+
           {/* Personaje */}
           <div className={movableDivClasses} ref={movableDivRef}></div>
 
