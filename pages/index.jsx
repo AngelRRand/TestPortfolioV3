@@ -19,7 +19,7 @@ export default function Home() {
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
   
   /* Camara */
-  const [cameraPosition, setCameraPosition] = useState({ x: 800, y: 1300 });
+  const [cameraPosition, setCameraPosition] = useState({ x: 750, y: 1400 });
   
   let animationFrameId;
   
@@ -28,8 +28,8 @@ export default function Home() {
     const movableDiv = movableDivRef.current;
 
   
-    movableDiv.style.bottom = '50vh';
-    movableDiv.style.left = '60vw';
+    movableDiv.style.bottom = '55vh';
+    movableDiv.style.left = '65vw';
     const boxes = [forBoxRef.current, threeBoxRef.current, secondBoxRef.current, primerBoxRef.current];
 
   
