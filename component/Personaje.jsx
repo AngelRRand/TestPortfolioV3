@@ -2,7 +2,7 @@ import React from 'react'
 
 const Personaje = ({ color, segundoColor }) => {
     return (
-        <svg version="1.1" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges">
+        <svg version="1.1" viewBox="0 -1 43 43"  width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges">
             <rect x="5" y="0" width="1" height="1" fill="#1A1715" />
             <rect x="6" y="0" width="1" height="1" fill="#1A1715" />
             <rect x="7" y="0" width="1" height="1" fill="#1A1715" />

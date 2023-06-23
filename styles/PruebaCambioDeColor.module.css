@@ -1,0 +1,75 @@
+.container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pj{
+    width: 40vw;
+    height: 40vw;
+
+}
+.cajas{
+    display: flex;
+
+}
+.caja{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    z-index: 1000;
+}
+.rosa {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #d228c4;
+}
+
+.verde {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #36d228;
+}
+.azul{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #2863d2;
+
+}
+.amarrillo{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #d28e28;
+
+}
+.rojo{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #e44848;
+}
+.celeste{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #74e9ed;
+}
+.marron{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #ee663c;
+}
+.default{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #2E425A;
+}

@@ -11,44 +11,45 @@ export default function Home() {
   const secondBoxRef = useRef(null);
   const threeBoxRef = useRef(null);
   const forBoxRef = useRef(null);
+  const fiveBoxRef = useRef(null);
 
-  
+
   const keyStateRef = useRef({});
   const pressedKeysRef = useRef([]);
   const [lastKeyPressed, setLastKeyPressed] = useState(null);
   const [movableDivClasses, setMovableDivClasses] = useState(`${stylesMove.sprite} ${stylesMove.spriteNotMoveS}`);
-  
+
   /* Camara */
   const [cameraPosition, setCameraPosition] = useState({ x: 750, y: 1400 });
-  
+
   let animationFrameId;
-  
+
   useEffect(() => {
     const container = containerRef.current;
     const movableDiv = movableDivRef.current;
 
-  
+
     movableDiv.style.bottom = '55vh';
     movableDiv.style.left = '65vw';
-    const boxes = [forBoxRef.current, threeBoxRef.current, secondBoxRef.current, primerBoxRef.current];
+    const boxes = [fiveBoxRef.current, forBoxRef.current, threeBoxRef.current, secondBoxRef.current, primerBoxRef.current];
 
-  
+
     const step = 3;
     const pushFactor = 1.3;
-  
+
     const isColliding = () => {
       const movableDivLeft = movableDiv.offsetLeft;
       const movableDivRight = movableDivLeft + movableDiv.offsetWidth;
       const movableDivTop = movableDiv.offsetTop;
       const movableDivBottom = movableDivTop + movableDiv.offsetHeight;
-    
+
       for (let i = 0; i < boxes.length; i++) {
         const box = boxes[i];
         const boxLeft = box.offsetLeft;
         const boxRight = boxLeft + box.offsetWidth;
         const boxTop = box.offsetTop;
         const boxBottom = boxTop + box.offsetHeight;
-    
+
         if (
           movableDivRight > boxLeft &&
           movableDivLeft < boxRight &&
@@ -58,19 +59,19 @@ export default function Home() {
           return true;
         }
       }
-    
+
       return false;
     };
-    
-  
+
+
     function handleKeyDown(event) {
       const { key } = event;
-  
+
       if (!keyStateRef.current[key]) {
         keyStateRef.current[key] = true;
         pressedKeysRef.current.push(key);
         setLastKeyPressed(key);
-  
+
         switch (key) {
           case 'a':
             setMovableDivClasses(`${stylesMove.sprite} ${stylesMove.spriteMoveA}`);
@@ -93,7 +94,7 @@ export default function Home() {
         }
       }
     }
-  
+
     function handleKeyUp(event) {
       const { key } = event;
       keyStateRef.current[key] = false;
@@ -101,11 +102,11 @@ export default function Home() {
       if (index !== -1) {
         pressedKeysRef.current.splice(index, 1);
       }
-    
+
       if (pressedKeysRef.current.length === 0) {
         const { w, a, s, d } = keyStateRef.current;
         const spriteNotMove = `${stylesMove.sprite} ${stylesMove.spriteNotMove}`;
-    
+
         if (key === 's' && !w) {
           setMovableDivClasses(`${spriteNotMove} ${stylesMove.spriteNotMoveS}`);
         } else if (key === 'd' && !a) {
@@ -138,7 +139,7 @@ export default function Home() {
         }
       }
     }
-  
+
     function moveLeft() {
       const currentLeft = movableDiv.offsetLeft;
       if (currentLeft > 0) {
@@ -151,7 +152,7 @@ export default function Home() {
         movableDiv.style.left = `${currentLeft + step * pushFactor}px`;
       }
     }
-  
+
     function moveUp() {
       const currentTop = movableDiv.offsetTop;
       if (currentTop > 0) {
@@ -164,7 +165,7 @@ export default function Home() {
         movableDiv.style.top = `${currentTop + step * pushFactor}px`;
       }
     }
-  
+
     function moveDown() {
       const currentTop = movableDiv.offsetTop;
       const movableDivHeight = movableDiv.offsetHeight;
@@ -179,7 +180,7 @@ export default function Home() {
         movableDiv.style.top = `${currentTop - step * pushFactor}px`;
       }
     }
-  
+
     function moveRight() {
       const currentLeft = movableDiv.offsetLeft;
       const movableDivWidth = movableDiv.offsetWidth;
@@ -194,16 +195,16 @@ export default function Home() {
         movableDiv.style.left = `${currentLeft - step * pushFactor}px`;
       }
     }
-  
+
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
-  
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
-  
+
 
 
   const containerStyle = {
@@ -227,7 +228,9 @@ export default function Home() {
       <main className={styles.main}>
 
         <div className={styles.center} ref={containerRef} style={containerStyle}>
-          <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={100} height={100} />
+          <Image src={"/img/techo.gif"} alt="" className={styles.casaImage2} width={200} height={100} />
+          <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={200} height={100} />
+          <div className={styles.obstacle5} ref={fiveBoxRef} />
           <div className={styles.obstacle4} ref={forBoxRef} />
           <div className={styles.obstacle3} ref={threeBoxRef} />
           <div className={styles.obstacle2} ref={secondBoxRef} />
@@ -235,17 +238,15 @@ export default function Home() {
 
           {/* Personaje */}
           <div className={movableDivClasses} ref={movableDivRef}></div>
-
-
           {/* Obstaculo */}
 
-          
 
 
 
 
 
-        
+
+
 
         </div>
 
