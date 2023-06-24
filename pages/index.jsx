@@ -6,7 +6,13 @@ import styles from '@/styles/Home.module.css';
 
 export default function Home() {
   const containerRef = useRef(null);
+  /* Personaje */
   const movableDivRef = useRef(null);
+  const sombraDivRef = useRef(null);
+
+
+
+  /* Obstaculos */
   const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
   const threeBoxRef = useRef(null);
@@ -35,7 +41,7 @@ export default function Home() {
 
 
     const step = 3;
-    const pushFactor = 1.3;
+    const pushFactor = 1.5;
 
     const isColliding = () => {
       const movableDivLeft = movableDiv.offsetLeft;
@@ -145,11 +151,13 @@ export default function Home() {
       if (currentLeft > 0) {
         movableDiv.style.left = `${currentLeft - step}px`;
         setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft - step }));
+        sombraDivRef.current.style.left = `${currentLeft - step}px`; 
       }
       if (keyStateRef.current['a'] && !isColliding()) {
         animationFrameId = requestAnimationFrame(moveLeft);
       } else if (isColliding()) {
         movableDiv.style.left = `${currentLeft + step * pushFactor}px`;
+        sombraDivRef.current.style.left = `${currentLeft + step * pushFactor}px`; 
       }
     }
 
@@ -158,11 +166,15 @@ export default function Home() {
       if (currentTop > 0) {
         movableDiv.style.top = `${currentTop - step}px`;
         setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop - step }));
+        sombraDivRef.current.style.top = `${currentTop - step}px`; 
+
       }
       if (keyStateRef.current['w'] && !isColliding()) {
         animationFrameId = requestAnimationFrame(moveUp);
       } else if (isColliding()) {
         movableDiv.style.top = `${currentTop + step * pushFactor}px`;
+        sombraDivRef.current.style.top = `${currentTop + step * pushFactor}px`; 
+
       }
     }
 
@@ -173,11 +185,15 @@ export default function Home() {
       if (currentTop + movableDivHeight < containerHeight) {
         movableDiv.style.top = `${currentTop + step}px`;
         setCameraPosition((prevPosition) => ({ ...prevPosition, y: currentTop + step }));
+        sombraDivRef.current.style.top = `${currentTop + step}px`; 
+
       }
       if (keyStateRef.current['s'] && !isColliding()) {
         animationFrameId = requestAnimationFrame(moveDown);
       } else if (isColliding()) {
         movableDiv.style.top = `${currentTop - step * pushFactor}px`;
+        sombraDivRef.current.style.top = `${currentTop - step * pushFactor}px`; 
+
       }
     }
 
@@ -188,11 +204,15 @@ export default function Home() {
       if (currentLeft + movableDivWidth < containerWidth) {
         movableDiv.style.left = `${currentLeft + step}px`;
         setCameraPosition((prevPosition) => ({ ...prevPosition, x: currentLeft + step }));
+        sombraDivRef.current.style.left = `${currentLeft + step}px`; 
+
       }
       if (keyStateRef.current['d'] && !isColliding()) {
         animationFrameId = requestAnimationFrame(moveRight);
       } else if (isColliding()) {
         movableDiv.style.left = `${currentLeft - step * pushFactor}px`;
+        sombraDivRef.current.style.left = `${currentLeft - step}px`; 
+
       }
     }
 
@@ -228,8 +248,15 @@ export default function Home() {
       <main className={styles.main}>
 
         <div className={styles.center} ref={containerRef} style={containerStyle}>
-          <Image src={"/img/techo.gif"} alt="" className={styles.casaImage2} width={200} height={100} />
-          <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={200} height={100} />
+
+
+
+          {/* Obstaculo */}
+          <Image src={"/img/b.gif"} alt="" className={styles.casaImage2} width={200} height={100} />
+          <Image src={"/img/a.gif"} alt="" className={styles.casaImage} width={200} height={100} />
+
+
+
           <div className={styles.obstacle5} ref={fiveBoxRef} />
           <div className={styles.obstacle4} ref={forBoxRef} />
           <div className={styles.obstacle3} ref={threeBoxRef} />
@@ -237,33 +264,18 @@ export default function Home() {
           <div className={styles.obstacle} ref={primerBoxRef} />
 
           {/* Personaje */}
-          <div className={movableDivClasses} ref={movableDivRef}></div>
-          {/* Obstaculo */}
+          <div className={movableDivClasses} ref={movableDivRef}>
 
 
 
-
-
+          </div>
+          <Image src={"/img/sombra.svg"} width={100} height={100} className={stylesMove.sombra1} ref={sombraDivRef}/>
 
 
 
 
         </div>
-
-
-        {/* Navegacion */}
       </main>
     </>
   );
 }
-
-
-{/* <Image src={"/img/Sprites.svg"} alt="" ref={movableDivRef} width={400} height={750}/>  */ }
-{/* <div className={movableDivClasses} ref={movableDivRef}>
-            <Sprite
-              animation={animation}
-            />
-          </div> */}
-
-
-{/*  <div className={`${styles.caja} ${stylesMove.spriteMoveD}`}></div> */ }

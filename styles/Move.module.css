@@ -9,7 +9,14 @@
   background-size: 650%; 
   animation: 0.8s steps(4) infinite;
   background-position-x: -15px;
-  z-index: 10000;
+  z-index: 1000;
+}
+.sombra1{
+
+  position: absolute;
+  height: 100px;
+  width: 60px;
+
 }
 .spriteNotMoveS{
   background-position-y: 0px;

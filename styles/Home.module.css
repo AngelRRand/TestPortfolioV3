@@ -88,10 +88,9 @@
 
 .obstacle5{
   width: 50vw;
-  height: 25vh;
-  grid-area: 15 / 13 / 16 / 14;
+  height: 45vh;
+  grid-area: 14 / 13 / 16 / 13;
   z-index: 1000;
-  background-color: rgba(237, 236, 226, 0.469);
 
 }
 
