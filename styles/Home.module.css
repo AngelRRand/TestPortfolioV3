@@ -29,7 +29,6 @@
   width: 350vw;
   image-rendering: pixelated;
   z-index: 350;
-  border-radius: 1px solid rgb(250, 251, 250);
 }
 
 .backgroundImage {

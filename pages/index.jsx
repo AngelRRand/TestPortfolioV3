@@ -230,7 +230,7 @@ export default function Home() {
   const containerStyle = {
     position: 'relative',
     border: '1px solid rgb(22, 22, 22)',
-    backgroundColor: 'rgb(199, 196, 196)',
+    backgroundColor: '#416834',
     height: '250vh',
     width: '250vw',
     transform: `translate(-${cameraPosition.x}px, -${cameraPosition.y}px)`
