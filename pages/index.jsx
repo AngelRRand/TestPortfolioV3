@@ -10,8 +10,6 @@ export default function Home() {
   const movableDivRef = useRef(null);
   const sombraDivRef = useRef(null);
 
-
-
   /* Obstaculos */
   const primerBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
@@ -253,7 +251,7 @@ export default function Home() {
 
           {/* Obstaculo */}
           <Image src={"/img/b.gif"} alt="" className={styles.casaImage2} width={200} height={100} />
-          <Image src={"/img/a.gif"} alt="" className={styles.casaImage} width={200} height={100} />
+          <Image src={"/img/casaaaaa.gif"} alt="" className={styles.casaImage} width={200} height={100} />
 
 
 

@@ -10,6 +10,26 @@ const Pj = () => {
     setColor(primero)
     setColor2(segundo)
   }
+
+  const saveSvg = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/svg', {
+        method: "post",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          color: color,
+          color2: color2
+        })
+      }).then((res) => res.json())
+      console.log(response.svg)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.cajas}>
@@ -21,13 +41,14 @@ const Pj = () => {
         <div onClick={() => changeColor('#74e9ed', '#2a5fc0')} className={[styles.celeste]}></div>
         <div onClick={() => changeColor('#ee663c', '#794617')} className={[styles.marron]}></div>
         <div onClick={() => changeColor('#2E425A', '#17283B')} className={[styles.default]}></div>
+        <button onClick={() => saveSvg()}>Save</button>
       </div>
       <div className={styles.pj}>
 
-      <Personaje
-        color={color}
-        segundoColor={color2}
-      />
+        <Personaje
+          color={color}
+          segundoColor={color2}
+        />
       </div>
     </div>
   );

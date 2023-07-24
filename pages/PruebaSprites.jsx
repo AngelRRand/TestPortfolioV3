@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Sprite from '../component/Sprite';
-import styles from '@/styles/sprite.module.css';
+import styles from '@/styles/PruebaCambioDeColor.module.css';
 
 const PruebaSprites = () => {
   const containerRef = useRef(null);
