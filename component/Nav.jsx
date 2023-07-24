@@ -9,8 +9,6 @@ const Nav = () => {
             <Image src={"/img/Base.svg"} alt="" className={`${styles.pj}`} width={200} height={200} />
             <div className={styles.links}>
                 <Link className={styles.link} href={'/pj'}>Cambios de colores</Link>
-                <Link className={styles.link} href={'/PruebaSprites'}>Sprite Animacion svg</Link>
-
             </div>
         </div>
     )
