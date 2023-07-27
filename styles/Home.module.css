@@ -43,34 +43,36 @@
 .obstacle {
   width: 50vw;
   height: 100%;
-  grid-area: 1 / 24 / 24 / 26;
+  grid-area: 1 / 25 / 26 / 26; 
   z-index: 1000;
-  background-color: rgba(237, 236, 226, 0.469);
+  background-color: red;
 }
+
+.obstacle4{
+  width: 50vw;
+  height: 100%;
+  grid-area: 1 / 1 / 26 / 2;
+  z-index: 1000;
+  background-color: red;
+}
+
 
 .obstacle2 {
   width: 100%;
   height: 60vh;
-  grid-area: 1 / 1 / 3 / 26;
+  grid-area: 1 / 2 / 2 / 25;
   z-index: 1000;
-  background-color: rgba(237, 236, 226, 0.469);
+  background-color: red;
 }
 
 .obstacle3{
   width: 100%;
   height: 30vh;
   z-index: 1000;
-  grid-area: 24 / 1 / 26 / 26;
-    background-color: rgba(237, 236, 226, 0.469);
+  grid-area: 25 / 2 / 26 / 25;
+    background-color: red;
 }
 
-.obstacle4{
-  width: 50vw;
-  height: 100%;
-  grid-area: 1 / 1 / 26 / 3;
-  z-index: 1000;
-  background-color: rgba(237, 236, 226, 0.469);
-}
 
 
 
