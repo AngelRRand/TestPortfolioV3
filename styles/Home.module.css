@@ -38,19 +38,6 @@
   image-rendering: pixelated;
 }
 
-.casaImage {
-  grid-area: 13 / 13 / 17 / 17;
-  height:75vh;
-  width: 50vw;
-
-}
-.casaImage2 {
-  grid-area: 13 / 13 / 17 / 17;
-  height:75vh;
-  width: 50vw;
-  position: absolute;
-  z-index: 1000000000;
-}
 
 
 .obstacle {
@@ -85,12 +72,31 @@
   background-color: rgba(237, 236, 226, 0.469);
 }
 
+
+
+
+.casaImage {
+  grid-area: 2 / 13 / 17 / 17;
+  height:75vh;
+  width: 50vw;
+
+}
+.casaImage2 {
+  grid-area: 2 / 13 / 17 / 17;
+  height:75vh;
+  width: 50vw;
+  position: absolute;
+  z-index: 1000000000;
+}
+
+
+/* Casa */
 .obstacle5{
   width: 50vw;
   height: 45vh;
-  grid-area: 14 / 13 / 16 / 13;
+  grid-area: 2 / 2 / 6 / 13;
   z-index: 1000;
-  /* background-color: rgba(219, 202, 12, 0.829); */
+   background-color: rgba(219, 202, 12, 0.829);
 
 }
 

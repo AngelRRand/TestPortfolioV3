@@ -54,10 +54,13 @@ export default function Home() {
 
 
           {/* Obstaculo */}
-          <Image src={"/img/b.gif"} alt="" className={styles.casaImage2} width={200} height={100} />
-          <Image src={"/img/casaaaaa.gif"} alt="" className={styles.casaImage} width={200} height={100} />
+          <Image src={"/img/b.gif"} alt="" className={styles.casaImage2} width={10} height={10} />
+          <Image src={"/img/casa.gif"} alt="" className={styles.casaImage} width={10} height={10} />
 
           <div className={styles.obstacle5} ref={fiveBoxRef} />
+
+
+          
           <div className={styles.obstacle4} ref={forBoxRef} />
           <div className={styles.obstacle3} ref={threeBoxRef} />
           <div className={styles.obstacle2} ref={secondBoxRef} />
